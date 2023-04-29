@@ -1,5 +1,20 @@
-<template>
+<script setup>
 
+import {ref,reactive} from 'vue'
+
+const formData=reactive({
+    email: '',
+    password: ''
+})
+const login=()=>{
+    axios.post('/api/auth/login',formData)
+    .then(res=> console.log(res.data))
+    .catch(error=> console.log(error.response.data))
+}
+
+</script>
+
+<template>
     <div>
         <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -11,13 +26,13 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">Login</h1>
                     </div>
-                    <form class="user">
+                    <form class="user" @submit.prevent="login">
                         <div class="form-group">
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                            placeholder="Enter Email Address">
+                        <input type="email" class="form-control" aria-describedby="emailHelp"
+                            placeholder="Enter Email Address" v-model="formData.email">
                         </div>
                         <div class="form-group">
-                        <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                        <input type="password" class="form-control"  v-model="formData.password" placeholder="Enter Password">
                         </div>
                         <div class="form-group">
                         <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
@@ -27,7 +42,7 @@
                         </div>
                         </div>
                         <div class="form-group">
-                        <a href="index.html" class="btn btn-primary btn-block">Login</a>
+                        <button class="btn btn-primary btn-block">Login</button>
                         </div>
                     </form>
                     <hr>
@@ -47,12 +62,6 @@
     </div>
 
 </template>
-
-<script>
-export default {
-
-}
-</script>
 
 <style>
 
