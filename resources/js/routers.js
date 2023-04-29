@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import login from './components/login.vue'
-import register from './components/register.vue'
-import forgetPassword from './components/forgetPassword.vue'
+import login from './components/auth/login.vue'
+import register from './components/auth/register.vue'
+import forgetPassword from './components/auth/forgetPassword.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
