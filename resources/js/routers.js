@@ -17,8 +17,8 @@ const router = createRouter({
         component: register
     },
     {
-        path: '/forgetPassword',
-        name: 'forgetPassword',
+        path: '/forget-password',
+        name: 'forget-password',
         component: forgetPassword
     }
   ]

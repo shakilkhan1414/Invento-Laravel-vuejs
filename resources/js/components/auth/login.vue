@@ -8,7 +8,7 @@ const formData=reactive({
 })
 const login=()=>{
     axios.post('/api/auth/login',formData)
-    .then(res=> console.log(res.data))
+    .then(res=> User.responseAfterLogin(res))
     .catch(error=> console.log(error.response.data))
 }
 
@@ -50,7 +50,7 @@ const login=()=>{
                         <router-link to="/register" class="font-weight-bold small">Create an Account!</router-link>
                     </div>
                     <div class="text-center">
-                        <router-link to="/forgetPassword" class="font-weight-bold small">Forget Password?</router-link>
+                        <router-link to="/forget-password" class="font-weight-bold small">Forget Password?</router-link>
                     </div>
                     </div>
                 </div>
