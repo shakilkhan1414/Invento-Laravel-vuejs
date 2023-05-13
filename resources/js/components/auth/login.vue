@@ -1,16 +1,54 @@
 <script setup>
 
-import {ref,reactive} from 'vue'
+import {ref,reactive,onBeforeMount } from 'vue'
+import { useRouter} from 'vue-router'
+
+const router = useRouter()
+
+onBeforeMount(() => {
+    if(User.loggedIn()){
+        router.push({name: 'dashboard'})
+    }
+
+});
 
 const formData=reactive({
     email: '',
     password: ''
 })
-const login=()=>{
+
+let errors=reactive({
+    email: '',
+    password: ''
+})
+
+const login= ()=>{
     axios.post('/api/auth/login',formData)
-    .then(res=> User.responseAfterLogin(res))
-    .catch(error=> console.log(error.response.data))
+    .then(res => {
+        User.responseAfterLogin(res)
+        Toast.fire({
+        icon: 'success',
+        title: 'Logged in successfully!'
+        })
+        router.push({name: 'dashboard'})
+    })
+    .catch(error=> {
+        console.log(errors.value)
+        if(error.response.status === 401){
+            Toast.fire({
+            icon: 'warning',
+            title: 'Invalid Email or Password!'
+            })
+        }
+        else if(error.response.status === 422){
+            errors.email = error.response.data.errors.email ? error.response.data.errors.email[0] : ''
+            errors.password = error.response.data.errors.password ? error.response.data.errors.password[0] : ''
+        }
+        }
+    )
+
 }
+
 
 </script>
 
@@ -30,9 +68,11 @@ const login=()=>{
                         <div class="form-group">
                         <input type="email" class="form-control" aria-describedby="emailHelp"
                             placeholder="Enter Email Address" v-model="formData.email">
+                            <small class="text-danger" v-if="errors.email">{{errors.email}}</small>
                         </div>
                         <div class="form-group">
                         <input type="password" class="form-control"  v-model="formData.password" placeholder="Enter Password">
+                        <small class="text-danger" v-if="errors.password">{{errors.password}}</small>
                         </div>
                         <div class="form-group">
                         <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">

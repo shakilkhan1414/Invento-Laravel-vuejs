@@ -1,3 +1,56 @@
+<script setup>
+
+import {ref,reactive,onBeforeMount } from 'vue'
+import { useRouter} from 'vue-router'
+
+const router = useRouter()
+
+onBeforeMount(() => {
+    if(User.loggedIn()){
+        router.push({name: 'dashboard'})
+    }
+
+});
+
+const formData=reactive({
+    name:'',
+    email: '',
+    password: '',
+    password_confirmation: ''
+})
+
+let errors=reactive({
+    name:'',
+    email: '',
+    password: ''
+})
+
+const signup= ()=>{
+    axios.post('/api/auth/signup',formData)
+    .then(res => {
+        User.responseAfterLogin(res)
+        Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully!'
+        })
+        router.push({name: 'dashboard'})
+    })
+    .catch(error=> {
+        if(error.response.status === 422){
+            errors.name = error.response.data.errors.name ? error.response.data.errors.name[0] : ''
+            errors.email = error.response.data.errors.email ? error.response.data.errors.email[0] : ''
+            errors.password = error.response.data.errors.password ? error.response.data.errors.password[0] : ''
+        }
+
+        }
+    )
+
+}
+
+
+</script>
+
+
 <template>
     <div>
         <div class="row justify-content-center">
@@ -10,20 +63,23 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Register</h1>
                         </div>
-                        <form>
+                        <form class="user" @submit.prevent='signup'>
                             <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Enter Full Name">
+                            <input type="text" class="form-control" placeholder="Enter Full Name" v-model="formData.name">
+                            <small class="text-danger" v-if="errors.name">{{errors.name}}</small>
                             </div>
                             <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                                placeholder="Enter Email Address">
+                            <input type="email" class="form-control" aria-describedby="emailHelp"
+                                placeholder="Enter Email Address" v-model="formData.email">
+                            <small class="text-danger" v-if="errors.email">{{errors.email}}</small>
                             </div>
                             <div class="form-group">
-                            <input type="password" class="form-control" id="exampleInputPassword" placeholder="Enter Password">
+                            <input type="password" class="form-control" placeholder="Enter Password" v-model="formData.password">
+                            <small class="text-danger" v-if="errors.password">{{errors.password}}</small>
                             </div>
                             <div class="form-group">
-                            <input type="password" class="form-control" id="exampleInputPasswordRepeat"
-                                placeholder="Confirm Password">
+                            <input type="password" class="form-control"
+                                placeholder="Confirm Password" v-model="formData.password_confirmation">
                             </div>
                             <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
@@ -45,11 +101,7 @@
     </div>
 </template>
 
-<script>
-export default {
 
-}
-</script>
 
 <style>
 
