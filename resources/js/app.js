@@ -5,6 +5,8 @@ import User from './helpers/User'
 window.User=User
 import Swal from 'sweetalert2'
 window.Swal=Swal
+import Notification from './helpers/Notification'
+window.Notification=Notification
 
 const Toast = Swal.mixin({
     toast: true,

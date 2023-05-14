@@ -4,6 +4,8 @@ import register from './components/auth/register.vue'
 import forgetPassword from './components/auth/forgetPassword.vue'
 import dashboard from './components/dashboard.vue'
 import logout from './components/auth/logout.vue'
+import addEmployee from './components/employee/create.vue'
+import employees from './components/employee/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +34,16 @@ const router = createRouter({
         path: '/logout',
         name: 'logout',
         component: logout
+    },
+    {
+        path: '/add-employee',
+        name: 'add-employee',
+        component: addEmployee
+    },
+    {
+        path: '/employees',
+        name: 'employees',
+        component: employees
     }
   ]
 })

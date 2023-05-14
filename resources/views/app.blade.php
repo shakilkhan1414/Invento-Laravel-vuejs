@@ -29,9 +29,9 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.html">
+                  <router-link class="nav-link" to="/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span></router-link>
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
@@ -41,17 +41,12 @@
                   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
                     aria-expanded="true" aria-controls="collapseBootstrap">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Bootstrap UI</span>
+                    <span>Employees</span>
                   </a>
                   <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                      <h6 class="collapse-header">Bootstrap UI</h6>
-                      <a class="collapse-item" href="alerts.html">Alerts</a>
-                      <a class="collapse-item" href="buttons.html">Buttons</a>
-                      <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                      <a class="collapse-item" href="modals.html">Modals</a>
-                      <a class="collapse-item" href="popovers.html">Popovers</a>
-                      <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                      <router-link class="collapse-item" to="/add-employee">Add Employee</router-link>
+                      <router-link class="collapse-item" to="/employees">All Employees</router-link>
                     </div>
                   </div>
                 </li>
