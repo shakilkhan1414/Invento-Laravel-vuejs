@@ -1,5 +1,4 @@
 <script setup>
-
 import {ref,reactive,onBeforeMount } from 'vue'
 import { useRouter} from 'vue-router'
 
@@ -12,38 +11,64 @@ onBeforeMount(() => {
 
 });
 
-const formData=reactive({
+let formData=reactive({
     name:'',
     email: '',
-    password: '',
-    password_confirmation: ''
+    address: '',
+    nid: '',
+    phone:'',
+    salary:'',
+    joining_date:'',
+    image:''
 })
 
 let errors=reactive({
     name:'',
     email: '',
-    password: ''
+    address: '',
+    nid: '',
+    phone:'',
+    salary:'',
+    joining_date:'',
+    image:''
 })
 
-const signup= ()=>{
-    axios.post('/api/auth/signup',formData)
-    .then(res => {
-        User.responseAfterLogin(res)
-        Toast.fire({
-        icon: 'success',
-        title: 'Signed in successfully!'
-        })
-        router.push({name: 'dashboard'})
+const insertEmployee= ()=>{
+    axios.post('/api/employee',formData)
+    .then(() => {
+        router.push({name: 'employees'})
+        Notification.success()
     })
     .catch(error=> {
         if(error.response.status === 422){
             errors.name = error.response.data.errors.name ? error.response.data.errors.name[0] : ''
             errors.email = error.response.data.errors.email ? error.response.data.errors.email[0] : ''
-            errors.password = error.response.data.errors.password ? error.response.data.errors.password[0] : ''
+            errors.address = error.response.data.errors.address ? error.response.data.errors.address[0] : ''
+            errors.nid = error.response.data.errors.nid ? error.response.data.errors.nid[0] : ''
+            errors.phone = error.response.data.errors.phone ? error.response.data.errors.phone[0] : ''
+            errors.salary = error.response.data.errors.salary ? error.response.data.errors.salary[0] : ''
+            errors.joining_date = error.response.data.errors.joining_date ? error.response.data.errors.joining_date[0] : ''
+            errors.image = error.response.data.errors.image ? error.response.data.errors.image[0] : ''
         }
 
         }
     )
+
+}
+
+const imageUpload=(event)=>{
+    let file=event.target.files[0]
+    if(file.size > 1048770){
+        Notification.image_validation()
+    }
+    else{
+        let reader=new FileReader()
+        reader.onload= event=>{
+            formData.image=event.target.result
+        }
+        reader.readAsDataURL(file)
+
+    }
 
 }
 
@@ -109,12 +134,20 @@ const signup= ()=>{
                                         <small class="text-danger" v-if="errors.joining_date">{{errors.joining_date}}</small>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="customFile">Employee Image</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-9">
+                                                <label for="image">Employee Image</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="image" @change="imageUpload">
+                                                <label class="custom-file-label" for="image">Choose file</label>
+                                                </div>
                                         <small class="text-danger" v-if="errors.image">{{errors.image}}</small>
+                                            </div>
+                                            <div class="col-md-3" v-if="formData.image">
+                                                <img :src="formData.image" style="height: 70px; width: 100%; object-fit: cover;">
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

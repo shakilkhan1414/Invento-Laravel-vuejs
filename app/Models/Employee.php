@@ -17,7 +17,7 @@ class Employee extends Model
         'phone',
         'salary',
         'joining_date',
-        'employee_image'
+        'image'
     ];
 
 }

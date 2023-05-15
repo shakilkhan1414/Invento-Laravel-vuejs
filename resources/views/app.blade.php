@@ -12,6 +12,8 @@
   <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/css/ruang-admin.min.css')}}" rel="stylesheet">
+  <link href="{{asset('backend/noty/noty.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('backend/noty/sunset.css')}}" rel="stylesheet" type="text/css">
   @vite('resources/css/app.css')
 </head>
 
@@ -330,6 +332,7 @@
   <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
   <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script>
   <script src="{{ asset('backend/js/demo/chart-area-demo.js') }}"></script>
+  <script src="{{asset('backend/noty/noty.js')}}"></script>
   @vite('resources/js/app.js')
 </body>
 

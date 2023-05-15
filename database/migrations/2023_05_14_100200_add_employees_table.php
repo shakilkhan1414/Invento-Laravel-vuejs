@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('salary');
             $table->string('joining_date');
-            $table->string('employee_image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

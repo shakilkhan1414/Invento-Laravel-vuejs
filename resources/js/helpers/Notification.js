@@ -2,20 +2,22 @@ class Notification{
 
     success(){
         new Noty({
+      theme: 'sunset',
       type: 'success',
       layout: 'topRight',
       text: 'Successfully Done!',
-      timeout: 1000,
+      timeout: 1500,
          }).show();
     }
 
 
     alert(){
         new Noty({
+        theme: 'sunset',
       type: 'alert',
       layout: 'topRight',
       text: 'Are you Sure?',
-      timeout: 1000,
+      timeout: 1500,
          }).show();
     }
 
@@ -23,20 +25,22 @@ class Notification{
 
     error(){
         new Noty({
+        theme: 'sunset',
       type: 'alert',
       layout: 'topRight',
       text: 'Something Went Wrong! ',
-      timeout: 1000,
+      timeout: 1500,
          }).show();
     }
 
 
    warning(){
         new Noty({
+        theme: 'sunset',
       type: 'warning',
       layout: 'topRight',
       text: 'Opps Wrong!',
-      timeout: 1000,
+      timeout: 1500,
          }).show();
     }
 
@@ -44,10 +48,11 @@ class Notification{
 
     image_validation(){
       new Noty({
+        theme: 'sunset',
       type: 'error',
       layout: 'topRight',
       text: 'Upload Image less then 1MB ',
-      timeout: 1000,
+      timeout: 1500,
          }).show();
     }
 
@@ -55,20 +60,22 @@ class Notification{
 
       cart_success(){
       new Noty({
+        theme: 'sunset',
       type: 'success',
       layout: 'topRight',
       text: 'Successfully Add to Cart!',
-      timeout: 1000,
+      timeout: 1500,
          }).show();
     }
 
 
      cart_delete(){
       new Noty({
+        theme: 'sunset',
       type: 'success',
       layout: 'topRight',
       text: 'Successfully Deleted!',
-      timeout: 1000,
+      timeout: 1500,
          }).show();
     }
 

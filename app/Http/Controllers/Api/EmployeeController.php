@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class EmployeeController extends Controller
 {
@@ -34,7 +35,31 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData=$request->validate([
+            'name'=> 'required',
+            'email'=> 'required | unique:employees',
+            'address'=> 'required',
+            'nid'=> 'required',
+            'phone'=> 'required | numeric',
+            'salary'=> 'required',
+            'joining_date'=> 'required '
+        ]);
+
+        if ($request->image) {
+            $position = strpos($request->image, ';');
+            $sub = substr($request->image, 0, $position);
+            $ext = explode('/', $sub)[1];
+
+            $name = time().".".$ext;
+            $img = Image::make($request->image)->resize(200,200);
+            $upload_path = 'backend/employee/';
+            $image_url = $upload_path.$name;
+            $img->save($image_url);
+            $validatedData['image']=$image_url;
+        }
+
+        Employee::create($validatedData);
+
     }
 
     /**
