@@ -1,13 +1,12 @@
 <script setup>
-
+import AppStorage from '../../helpers/AppStorage'
 import {onBeforeMount } from 'vue'
 import { useRouter} from 'vue-router'
 
 const router = useRouter()
 
 onBeforeMount(() => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+    AppStorage.clear()
     Toast.fire({
             icon: 'success',
             title: 'Logged out successfully!'

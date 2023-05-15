@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="{{asset('backend/img/logo/logo.png')}}" rel="icon">
+  <link href="{{asset('backend/img/logo/favicon.png')}}" rel="icon">
   <title>Inventory Management App</title>
   <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
@@ -21,12 +21,12 @@
         <!-- Sidebar -->
         <nav v-if="$route.path === '/' || $route.path === '/register' || $route.path === '/forget-password' ? false : true">
             <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <router-link class="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
                   <div class="sidebar-brand-icon">
-                    <img src="{{asset('backend/img/logo/logo2.png')}}">
+                    <img src="{{asset('backend/img/logo/logo.png')}}">
                   </div>
-                  <div class="sidebar-brand-text mx-3">Invento</div>
-                </a>
+                  <div class="sidebar-brand-text mx-2">Invento</div>
+                </router-link>
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
                   <router-link class="nav-link" to="/dashboard">
