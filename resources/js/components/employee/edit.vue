@@ -1,14 +1,15 @@
 <script setup>
-import {ref,reactive,onBeforeMount } from 'vue'
-import { useRouter} from 'vue-router'
+import {ref,reactive,onBeforeMount,computed } from 'vue'
+import { useRouter, useRoute} from 'vue-router'
 
 const router = useRouter()
+const route=useRoute()
 
 onBeforeMount(() => {
     if(!User.loggedIn()){
         router.push({name: 'login'})
     }
-
+    employeeData()
 });
 
 let formData=reactive({
@@ -19,7 +20,8 @@ let formData=reactive({
     phone:'',
     salary:'',
     joining_date:'',
-    image:''
+    image:'',
+    newImage:''
 })
 
 let errors=reactive({
@@ -33,8 +35,34 @@ let errors=reactive({
     image:''
 })
 
-const insertEmployee= ()=>{
-    axios.post('/api/employee',formData)
+
+const employeeData=()=>{
+    let id=route.params.id
+    axios.get('/api/employee/'+id)
+    .then(res=>{
+        formData.name=res.data.name
+        formData.email=res.data.email
+        formData.address=res.data.address
+        formData.nid=res.data.nid
+        formData.phone=res.data.phone
+        formData.salary=res.data.salary
+        formData.joining_date=res.data.joining_date
+        if (!res.data.image) {
+            formData.image=res.data.image
+        }
+        else{
+            formData.image="/"+res.data.image
+        }
+
+    })
+    .catch(error=>{
+        console.log(error)
+    })
+}
+
+const updateEmployee= ()=>{
+    let id=route.params.id
+    axios.patch('/api/employee/'+id,formData)
     .then(() => {
         router.push({name: 'employees'})
         Notification.success()
@@ -64,7 +92,8 @@ const imageUpload=(event)=>{
     else{
         let reader=new FileReader()
         reader.onload= event=>{
-            formData.image=event.target.result
+            formData.newImage=event.target.result
+            formData.image=formData.newImage
         }
         reader.readAsDataURL(file)
 
@@ -87,9 +116,9 @@ const imageUpload=(event)=>{
                     <div class="col-lg-12">
                         <div class="login-form">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Add Employee</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Update Employee</h1>
                         </div>
-                        <form class="user" @submit.prevent='insertEmployee' enctype="multipart/form-data">
+                        <form class="user" @submit.prevent='updateEmployee' enctype="multipart/form-data">
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-md-6">
@@ -147,12 +176,11 @@ const imageUpload=(event)=>{
                                                 <img :src="formData.image" style="height: 70px; width: 100%; object-fit: cover;">
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block">Update</button>
                             </div>
                         </form>
                         </div>
@@ -164,7 +192,6 @@ const imageUpload=(event)=>{
         </div>
     </div>
 </template>
-
 
 
 <style>

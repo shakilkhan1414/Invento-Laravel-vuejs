@@ -6,6 +6,7 @@ import dashboard from './components/dashboard.vue'
 import logout from './components/auth/logout.vue'
 import addEmployee from './components/employee/create.vue'
 import employees from './components/employee/index.vue'
+import editEmployee from './components/employee/edit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
         path: '/employees',
         name: 'employees',
         component: employees
+    },
+    {
+        path: '/employee/edit/:id',
+        name: 'edit-employee',
+        component: editEmployee
     }
   ]
 })
