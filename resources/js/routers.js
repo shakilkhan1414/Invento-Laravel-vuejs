@@ -7,6 +7,9 @@ import logout from './components/auth/logout.vue'
 import addEmployee from './components/employee/create.vue'
 import employees from './components/employee/index.vue'
 import editEmployee from './components/employee/edit.vue'
+import addSupplier from './components/supplier/create.vue'
+import suppliers from './components/supplier/index.vue'
+import editSupplier from './components/supplier/edit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +53,21 @@ const router = createRouter({
         path: '/employee/edit/:id',
         name: 'edit-employee',
         component: editEmployee
+    },
+    {
+        path: '/add-supplier',
+        name: 'add-supplier',
+        component: addSupplier
+    },
+    {
+        path: '/suppliers',
+        name: 'suppliers',
+        component: suppliers
+    },
+    {
+        path: '/supplier/edit/:id',
+        name: 'edit-supplier',
+        component: editSupplier
     }
   ]
 })

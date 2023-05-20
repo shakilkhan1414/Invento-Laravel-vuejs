@@ -40,18 +40,31 @@
                   Features
                 </div>
                 <li class="nav-item">
-                  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                    aria-expanded="true" aria-controls="collapseBootstrap">
+                  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
+                    aria-expanded="true" aria-controls="collapseEmployee">
                     <i class="far fa-fw fa-window-maximize"></i>
                     <span>Employees</span>
                   </a>
-                  <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                  <div id="collapseEmployee" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                       <router-link class="collapse-item" to="/add-employee">Add Employee</router-link>
                       <router-link class="collapse-item" to="/employees">All Employees</router-link>
                     </div>
                   </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSupplier"
+                      aria-expanded="true" aria-controls="collapseSupplier">
+                      <i class="far fa-fw fa-window-maximize"></i>
+                      <span>Suppliers</span>
+                    </a>
+                    <div id="collapseSupplier" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                      <div class="bg-white py-2 collapse-inner rounded">
+                        <router-link class="collapse-item" to="/add-supplier">Add Supplier</router-link>
+                        <router-link class="collapse-item" to="/suppliers">All Suppliers</router-link>
+                      </div>
+                    </div>
+                  </li>
                 <li class="nav-item">
                   <a class="nav-link" href="forms.html">
                     <i class="fab fa-fw fa-wpforms"></i>
