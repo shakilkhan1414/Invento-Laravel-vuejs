@@ -47,8 +47,8 @@ const deleteCategory=(id)=>{
         if (result.isConfirmed) {
             axios.delete('/api/category/'+id)
             .then(()=>{
-                categories.value=categories.value.filter(categories=>{
-                    return categories.id != id
+                categories.value=categories.value.filter(category=>{
+                    return category.id != id
                 })
             })
             .catch(()=>{
@@ -57,7 +57,7 @@ const deleteCategory=(id)=>{
 
             Swal.fire(
             'Deleted!',
-            'Supplier has been deleted.',
+            'Category has been deleted.',
             'success'
             )
         }
@@ -72,7 +72,7 @@ const deleteCategory=(id)=>{
     <div>
         <div class="row justify-content-center">
             <div class="col-xl-12 col-lg-12 col-md-12">
-            <router-link class="btn btn-primary" to="/add-category">Add Category</router-link>
+            <router-link class="btn btn-primary" to="/categories/create">Add Category</router-link>
             <input type="text" v-model="searchTerm" class="form-control mb-1 mt-3" style="width: 400px;" placeholder="Search here">
                 <div class="card shadow-sm my-4">
                         <div class="row">

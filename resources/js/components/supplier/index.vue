@@ -72,7 +72,7 @@ const deleteSupplier=(id)=>{
     <div>
         <div class="row justify-content-center">
             <div class="col-xl-12 col-lg-12 col-md-12">
-            <router-link class="btn btn-primary" to="/add-supplier">Add Supplier</router-link>
+            <router-link class="btn btn-primary" to="/suppliers/create">Add Supplier</router-link>
             <input type="text" v-model="searchTerm" class="form-control mb-1 mt-3" style="width: 400px;" placeholder="Search here">
                 <div class="card shadow-sm my-4">
                         <div class="row">

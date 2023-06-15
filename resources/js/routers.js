@@ -17,6 +17,7 @@ import addCategory from './components/category/create.vue'
 import categories from './components/category/index.vue'
 import editCategory from './components/category/edit.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -46,7 +47,7 @@ const router = createRouter({
         component: logout
     },
     {
-        path: '/add-employee',
+        path: '/employees/create',
         name: 'add-employee',
         component: addEmployee
     },
@@ -61,7 +62,7 @@ const router = createRouter({
         component: editEmployee
     },
     {
-        path: '/add-supplier',
+        path: '/suppliers/create',
         name: 'add-supplier',
         component: addSupplier
     },
@@ -76,7 +77,7 @@ const router = createRouter({
         component: editSupplier
     },
     {
-        path: '/add-category',
+        path: '/categories/create',
         name: 'add-category',
         component: addCategory
     },

@@ -33,7 +33,6 @@ const login= ()=>{
         router.push({name: 'dashboard'})
     })
     .catch(error=> {
-        console.log(errors.value)
         if(error.response.status === 401){
             Toast.fire({
             icon: 'warning',

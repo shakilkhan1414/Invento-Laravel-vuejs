@@ -47,7 +47,7 @@
                   </a>
                   <div id="collapseEmployee" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                      <router-link class="collapse-item" to="/add-employee">Add Employee</router-link>
+                      <router-link class="collapse-item" to="/employees/create">Add Employee</router-link>
                       <router-link class="collapse-item" to="/employees">All Employees</router-link>
                     </div>
                   </div>
@@ -60,7 +60,7 @@
                     </a>
                     <div id="collapseSupplier" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                       <div class="bg-white py-2 collapse-inner rounded">
-                        <router-link class="collapse-item" to="/add-supplier">Add Supplier</router-link>
+                        <router-link class="collapse-item" to="/suppliers/create">Add Supplier</router-link>
                         <router-link class="collapse-item" to="/suppliers">All Suppliers</router-link>
                       </div>
                     </div>
@@ -73,7 +73,7 @@
                     </a>
                     <div id="collapseCategory" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                       <div class="bg-white py-2 collapse-inner rounded">
-                        <router-link class="collapse-item" to="/add-category">Add Category</router-link>
+                        <router-link class="collapse-item" to="/categories/create">Add Category</router-link>
                         <router-link class="collapse-item" to="/categories">All Categories</router-link>
                       </div>
                     </div>
