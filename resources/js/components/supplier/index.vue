@@ -1,7 +1,8 @@
 <script setup>
 
-import {ref,reactive,onBeforeMount,computed } from 'vue'
+import {ref,reactive,onBeforeMount,computed,watch } from 'vue'
 import { useRouter} from 'vue-router'
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 const router = useRouter()
 let searchTerm=ref('')
@@ -15,6 +16,7 @@ onBeforeMount(() => {
 
 
 const suppliers=reactive([])
+const filterSearch=reactive([])
 
 const allSupplier= ()=>{
     axios.get('/api/supplier')
@@ -28,11 +30,15 @@ const allSupplier= ()=>{
 
 }
 
-const filterSearch=computed(()=>{
-    return suppliers.value.filter(suppliers=>{
-        return suppliers.name.toLowerCase().match(searchTerm.value.toLowerCase()) || suppliers.phone.match(searchTerm.value)
+watch(() => suppliers.value, (currentValue, oldValue) => {
+    filterSearch.value = currentValue;
+});
+
+watch(searchTerm, (currentValue, oldValue) => {
+    filterSearch.value = suppliers.value.filter(supplier=>{
+        return supplier.name.toLowerCase().match(currentValue.toLowerCase()) || supplier.phone.match(currentValue)
     })
-})
+});
 
 const deleteSupplier=(id)=>{
     Swal.fire({
@@ -96,7 +102,7 @@ const deleteSupplier=(id)=>{
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(supplier,index) in filterSearch" :key="supplier.id">
+                                <tr v-for="(supplier,index) in filterSearch.value" :key="supplier.id">
                                     <td>{{index+1}}</td>
                                     <td>{{supplier.name}}</td>
                                     <td>{{supplier.email}}</td>
@@ -110,6 +116,9 @@ const deleteSupplier=(id)=>{
                                 </tr>
                                 </tbody>
                             </table>
+                            <div v-if="!filterSearch.value" class="loading">
+                                <ClipLoader color="#3742fa"/>
+                            </div>
                             </div>
                             <div class="card-footer"></div>
                         </div>

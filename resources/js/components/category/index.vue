@@ -1,7 +1,8 @@
 <script setup>
 
-import {ref,reactive,onBeforeMount,computed } from 'vue'
+import {ref,reactive,onBeforeMount,computed,watch } from 'vue'
 import { useRouter} from 'vue-router'
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 const router = useRouter()
 let searchTerm=ref('')
@@ -15,6 +16,7 @@ onBeforeMount(() => {
 
 
 const categories=reactive([])
+const filterSearch=reactive([])
 
 const allCategory= ()=>{
     axios.get('/api/category')
@@ -28,11 +30,15 @@ const allCategory= ()=>{
 
 }
 
-const filterSearch=computed(()=>{
-    return categories.value.filter(category=>{
-        return category.category_name.toLowerCase().match(searchTerm.value.toLowerCase())
+watch(() => categories.value, (currentValue, oldValue) => {
+    filterSearch.value = currentValue;
+});
+
+watch(searchTerm, (currentValue, oldValue) => {
+    filterSearch.value = categories.value.filter(category=>{
+        return category.category_name.toLowerCase().match(currentValue.toLowerCase())
     })
-})
+});
 
 const deleteCategory=(id)=>{
     Swal.fire({
@@ -92,7 +98,7 @@ const deleteCategory=(id)=>{
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(category,index) in filterSearch" :key="category.id">
+                                <tr v-for="(category,index) in filterSearch.value" :key="category.id">
                                     <td>{{index+1}}</td>
                                     <td>{{category.category_name}}</td>
                                     <td>
@@ -102,6 +108,9 @@ const deleteCategory=(id)=>{
                                 </tr>
                                 </tbody>
                             </table>
+                            <div v-if="!filterSearch.value" class="loading">
+                                <ClipLoader color="#3742fa"/>
+                            </div>
                             </div>
                             <div class="card-footer"></div>
                         </div>

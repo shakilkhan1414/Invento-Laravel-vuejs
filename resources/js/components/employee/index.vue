@@ -14,9 +14,9 @@ onBeforeMount(() => {
     allEmployee()
 });
 
-watch()
 
 const employees=reactive([])
+const filterSearch=reactive([])
 
 const allEmployee= ()=>{
     axios.get('/api/employee')
@@ -27,14 +27,17 @@ const allEmployee= ()=>{
             console.log(error)
         }
     )
-
 }
 
-const filterSearch=computed(()=>{
-    return employees.value.filter(employee=>{
-        return employee.name.toLowerCase().match(searchTerm.value.toLowerCase()) || employee.phone.match(searchTerm.value)
+watch(() => employees.value, (currentValue, oldValue) => {
+    filterSearch.value = currentValue;
+});
+
+watch(searchTerm, (currentValue, oldValue) => {
+    filterSearch.value = employees.value.filter(employee=>{
+        return employee.name.toLowerCase().match(currentValue.toLowerCase()) || employee.phone.match(currentValue)
     })
-})
+});
 
 const deleteEmployee=(id)=>{
     Swal.fire({
@@ -98,7 +101,7 @@ const deleteEmployee=(id)=>{
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(employee,index) in filterSearch" :key="employee.id">
+                                <tr v-for="(employee,index) in filterSearch.value" :key="employee.id">
                                     <td>{{index+1}}</td>
                                     <td>{{employee.name}}</td>
                                     <td>{{employee.email}}</td>
@@ -113,6 +116,10 @@ const deleteEmployee=(id)=>{
                                 </tr>
                                 </tbody>
                             </table>
+                            <div v-if="!filterSearch.value" class="loading">
+                                <ClipLoader color="#3742fa"/>
+                            </div>
+
                             </div>
 
                             <div class="card-footer"></div>
