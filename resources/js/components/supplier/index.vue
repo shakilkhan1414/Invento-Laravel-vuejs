@@ -1,6 +1,6 @@
 <script setup>
 
-import {ref,reactive,onBeforeMount,computed,watch } from 'vue'
+import {ref,reactive,onBeforeMount,watch } from 'vue'
 import { useRouter} from 'vue-router'
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 

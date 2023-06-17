@@ -1,5 +1,5 @@
 <script setup>
-import {ref,reactive,onBeforeMount,computed } from 'vue'
+import {ref,reactive,onBeforeMount } from 'vue'
 import { useRouter, useRoute} from 'vue-router'
 
 const router = useRouter()

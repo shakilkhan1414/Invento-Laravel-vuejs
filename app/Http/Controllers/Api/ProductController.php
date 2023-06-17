@@ -3,29 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\Product;
 use Intervention\Image\Facades\Image;
 
-class EmployeeController extends Controller
+class ProductController extends Controller
 {
 
     public function index()
     {
-        $employees=Employee::all();
-        return response()->json($employees);
+        $products = Product::with('category', 'supplier')->get();
+        return response()->json($products);
     }
 
     public function store(Request $request)
     {
         $validatedData=$request->validate([
-            'name'=> 'required',
-            'email'=> 'required | unique:employees',
-            'address'=> 'required',
-            'nid'=> 'required',
-            'phone'=> 'required | numeric',
-            'salary'=> 'required',
-            'joining_date'=> 'required '
+            'product_name'=> 'required',
+            'product_code'=> 'required | unique:products',
+            'root'=> 'required',
+            'buying_price'=> 'required',
+            'selling_price'=> 'required',
+            'category_id'=> 'required',
+            'supplier_id'=> 'required ',
+            'buying_date'=> 'required ',
+            'product_quantity'=> 'required '
         ]);
 
         if ($request->image) {
@@ -35,60 +37,62 @@ class EmployeeController extends Controller
 
             $name = time().".".$ext;
             $img = Image::make($request->image)->resize(200,200);
-            $upload_path = 'backend/img/employee/';
+            $upload_path = 'backend/img/product/';
             $image_url = $upload_path.$name;
             $img->save($image_url);
             $validatedData['image']=$image_url;
         }
 
-        Employee::create($validatedData);
-
+        Product::create($validatedData);
     }
+
 
     public function show($id)
     {
-        $employee=Employee::find($id);
-        return response()->json($employee);
-
+        $product=Product::find($id);
+        return response()->json($product);
     }
+
 
     public function update(Request $request, $id)
     {
-        $employee=Employee::find($id);
+        $product=Product::find($id);
 
         $validatedData=$request->validate([
-            'name'=> 'required',
-            'email'=> 'required',
-            'address'=> 'required',
-            'nid'=> 'required',
-            'phone'=> 'required | numeric',
-            'salary'=> 'required',
-            'joining_date'=> 'required '
+            'product_name'=> 'required',
+            'product_code'=> 'required',
+            'root'=> 'required',
+            'buying_price'=> 'required',
+            'selling_price'=> 'required',
+            'category_id'=> 'required',
+            'supplier_id'=> 'required ',
+            'buying_date'=> 'required ',
+            'product_quantity'=> 'required '
         ]);
 
         if ($request->newImage) {
-            unlink($employee->image);
+            unlink($product->image);
             $position = strpos($request->newImage, ';');
             $sub = substr($request->newImage, 0, $position);
             $ext = explode('/', $sub)[1];
 
             $name = time().".".$ext;
             $img = Image::make($request->newImage)->resize(200,200);
-            $upload_path = 'backend/img/employee/';
+            $upload_path = 'backend/img/product/';
             $image_url = $upload_path.$name;
             $img->save($image_url);
             $validatedData['image']=$image_url;
         }
 
-        $employee->update($validatedData);
+        $product->update($validatedData);
     }
 
     public function destroy($id)
     {
-        $employee=Employee::find($id);
-        if($employee->image){
-            unlink($employee->image);
+        $product=Product::find($id);
+        if($product->image){
+            unlink($product->image);
         }
-        $employee->delete();
+        $product->delete();
     }
 }

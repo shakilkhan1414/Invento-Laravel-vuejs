@@ -17,6 +17,10 @@ import addCategory from './components/category/create.vue'
 import categories from './components/category/index.vue'
 import editCategory from './components/category/edit.vue'
 
+import addProduct from './components/product/create.vue'
+import products from './components/product/index.vue'
+import editProduct from './components/product/edit.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -90,6 +94,21 @@ const router = createRouter({
         path: '/category/edit/:id',
         name: 'edit-category',
         component: editCategory
+    },
+    {
+        path: '/products/create',
+        name: 'add-product',
+        component: addProduct
+    },
+    {
+        path: '/products',
+        name: 'products',
+        component: products
+    },
+    {
+        path: '/product/edit/:id',
+        name: 'edit-product',
+        component: editProduct
     }
   ]
 })
