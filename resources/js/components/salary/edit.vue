@@ -9,7 +9,7 @@ onBeforeMount(() => {
     if(!User.loggedIn()){
         router.push({name: 'login'})
     }
-    employeeData()
+    salaryData()
 });
 
 let formData=reactive({
@@ -25,31 +25,26 @@ let errors=reactive({
 })
 
 
-const employeeData=()=>{
+const salaryData=()=>{
     let id=route.params.id
-    axios.get('/api/employee/'+id)
+    axios.get('/api/salary/'+id)
     .then(res=>{
-        formData.name=res.data.name
-        formData.email=res.data.email
-        formData.amount=res.data.salary
+        formData.name=res.data.employee.name
+        formData.email=res.data.employee.email
+        formData.amount=res.data.amount
+        formData.salary_month=res.data.salary_month
     })
     .catch(error=>{
         console.log(error)
     })
 }
 
-const paySalary= ()=>{
+const updateSalary= ()=>{
     let id=route.params.id
-    axios.post('/api/salary/pay/'+id,formData)
-    .then((res) => {
-        if(res.data=="Salary Already Paid"){
-            Notification.alreadyPaid()
-        }
-        else{
-            router.push({name: 'salaries'})
-            Notification.success()
-        }
-
+    axios.patch('/api/salary/'+id,formData)
+    .then(() => {
+        router.push({name: 'salaries'})
+        Notification.success()
     })
     .catch(error=> {
         if(error.response.status === 422){
@@ -77,9 +72,9 @@ const paySalary= ()=>{
                     <div class="col-lg-12">
                         <div class="login-form">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Pay Salary</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Update Salary</h1>
                         </div>
-                        <form class="user" @submit.prevent='paySalary' enctype="multipart/form-data">
+                        <form class="user" @submit.prevent='updateSalary' enctype="multipart/form-data">
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-md-6">
@@ -120,7 +115,7 @@ const paySalary= ()=>{
                                 </div>
                             </div>
                             <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Pay Salary</button>
+                            <button type="submit" class="btn btn-primary btn-block">Update Salary</button>
                             </div>
                         </form>
                         </div>

@@ -16,4 +16,10 @@ class Salary extends Model
         'salary_month',
         'salary_year'
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
 }

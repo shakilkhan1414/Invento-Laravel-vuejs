@@ -11,7 +11,8 @@ class SalaryController extends Controller
 
     public function index()
     {
-        //
+        $salaries = Salary::with('employee')->get();
+        return response()->json($salaries);
     }
 
     public function paySalary(Request $request, $id)
@@ -38,17 +39,25 @@ class SalaryController extends Controller
 
     public function show($id)
     {
-        //
+        $salary=Salary::with('employee')->find($id);
+        return response()->json($salary);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $salary=Salary::find($id);
+
+        $validatedData=$request->validate([
+            'amount'=> 'required',
+            'salary_month'=> 'required'
+        ]);
+
+        $salary->update($validatedData);
     }
 
     public function destroy($id)
     {
-        //
+        Salary::destroy($id);
     }
 }
 

@@ -79,7 +79,15 @@ class Notification{
          }).show();
     }
 
-
+    alreadyPaid(){
+        new Noty({
+          theme: 'sunset',
+        type: 'error',
+        layout: 'topRight',
+        text: 'Salary Already Paid!',
+        timeout: 1500,
+           }).show();
+      }
 
   }
 

@@ -28,6 +28,7 @@ import editExpense from './components/expense/edit.vue'
 import salaryEmployees from './components/salary/employeeList.vue'
 import salaries from './components/salary/index.vue'
 import paySalary from './components/salary/create.vue'
+import editSalary from './components/salary/edit.vue'
 
 
 const router = createRouter({
@@ -147,6 +148,11 @@ const router = createRouter({
         path: '/salary/pay/:id',
         name: 'paySalary',
         component: paySalary
+    },
+    {
+        path: '/salary/edit/:id',
+        name: 'edit-salary',
+        component: editSalary
     }
   ]
 })

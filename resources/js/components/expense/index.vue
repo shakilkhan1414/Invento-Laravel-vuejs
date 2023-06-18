@@ -57,7 +57,7 @@ const deleteExpense=(id)=>{
                     return expense.id != id
                 })
             })
-            .catch((err)=>{
+            .catch(()=>{
                 router.push({name: 'expenses'})
             })
 

@@ -134,7 +134,7 @@ const imageUpload=(event)=>{
     <div>
         <div class="row justify-content-center">
             <div class="col-xl-12 col-lg-12 col-md-12">
-                <router-link class="btn btn-primary" to="/products">All Product</router-link>
+                <router-link class="btn btn-primary" to="/products">All Products</router-link>
                 <div class="card shadow-sm my-4">
                 <div class="card-body p-0">
                     <div class="row">
@@ -230,7 +230,7 @@ const imageUpload=(event)=>{
                                 </div>
                             </div>
                             <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block">Update</button>
                             </div>
                         </form>
                         </div>
