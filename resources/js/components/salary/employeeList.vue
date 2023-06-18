@@ -39,37 +39,6 @@ watch(searchTerm, (currentValue, oldValue) => {
     })
 });
 
-const deleteEmployee=(id)=>{
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            axios.delete('/api/employee/'+id)
-            .then(()=>{
-                employees.value=employees.value.filter(employee=>{
-                    return employee.id != id
-                })
-            })
-            .catch(()=>{
-                router.push({name: 'employees'})
-            })
-
-            Swal.fire(
-            'Deleted!',
-            'Employee has been deleted.',
-            'success'
-            )
-        }
-    })
-
-}
-
 </script>
 
 
@@ -77,7 +46,7 @@ const deleteEmployee=(id)=>{
     <div>
         <div class="row justify-content-center">
             <div class="col-xl-12 col-lg-12 col-md-12">
-            <router-link class="btn btn-primary" to="/employees/create">Add Employee</router-link>
+            <router-link class="btn btn-primary" to="/salaries">All Salaries</router-link>
             <input type="text" v-model="searchTerm" class="form-control mb-1 mt-3" style="width: 400px;" placeholder="Search here">
                 <div class="card shadow-sm my-4">
                         <div class="row">
@@ -96,7 +65,6 @@ const deleteEmployee=(id)=>{
                                     <th>NID</th>
                                     <th>Phone</th>
                                     <th>Salary</th>
-                                    <th>Joining Date</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -109,11 +77,9 @@ const deleteEmployee=(id)=>{
                                     <td>{{employee.nid}}</td>
                                     <td>{{employee.phone}}</td>
                                     <td>{{employee.salary}}</td>
-                                    <td>{{employee.joining_date}}</td>
-                                    <td><img :src="employee.image" class="employee-image"></td>
+                                    <td><img v-if="employee.image" :src="'/'+employee.image" class="employee-image"></td>
                                     <td>
-                                        <router-link :to="{name: 'edit-employee',params: {id:employee.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Edit</router-link>
-                                        <button @click="deleteEmployee(employee.id)" class="btn btn-danger btn-sm mb-1">Delete</button>
+                                        <router-link :to="{name: 'paySalary',params: {id:employee.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Pay Salary</router-link>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -133,8 +99,6 @@ const deleteEmployee=(id)=>{
         </div>
     </div>
 </template>
-
-
 
 <style>
 

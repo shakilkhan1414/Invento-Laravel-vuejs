@@ -104,6 +104,19 @@
                       </div>
                     </div>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSalary"
+                      aria-expanded="true" aria-controls="collapseSalary">
+                      <i class="far fa-fw fa-window-maximize"></i>
+                      <span>Salaries</span>
+                    </a>
+                    <div id="collapseSalary" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                      <div class="bg-white py-2 collapse-inner rounded">
+                        <router-link class="collapse-item" to="/salary/employees">Pay Salary</router-link>
+                        <router-link class="collapse-item" to="/salaries">All Salaries</router-link>
+                      </div>
+                    </div>
+                  </li>
 
 
 

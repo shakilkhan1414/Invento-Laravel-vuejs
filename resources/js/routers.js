@@ -25,6 +25,10 @@ import addExpense from './components/expense/create.vue'
 import expenses from './components/expense/index.vue'
 import editExpense from './components/expense/edit.vue'
 
+import salaryEmployees from './components/salary/employeeList.vue'
+import salaries from './components/salary/index.vue'
+import paySalary from './components/salary/create.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -128,6 +132,21 @@ const router = createRouter({
         path: '/expense/edit/:id',
         name: 'edit-expense',
         component: editExpense
+    },
+    {
+        path: '/salaries',
+        name: 'salaries',
+        component: salaries
+    },
+    {
+        path: '/salary/employees',
+        name: 'salaryEmployees',
+        component: salaryEmployees
+    },
+    {
+        path: '/salary/pay/:id',
+        name: 'paySalary',
+        component: paySalary
     }
   ]
 })
