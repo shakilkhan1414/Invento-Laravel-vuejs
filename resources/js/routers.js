@@ -21,6 +21,10 @@ import addProduct from './components/product/create.vue'
 import products from './components/product/index.vue'
 import editProduct from './components/product/edit.vue'
 
+import addExpense from './components/expense/create.vue'
+import expenses from './components/expense/index.vue'
+import editExpense from './components/expense/edit.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -109,6 +113,21 @@ const router = createRouter({
         path: '/product/edit/:id',
         name: 'edit-product',
         component: editProduct
+    },
+    {
+        path: '/expenses/create',
+        name: 'add-expense',
+        component: addExpense
+    },
+    {
+        path: '/expenses',
+        name: 'expenses',
+        component: expenses
+    },
+    {
+        path: '/expense/edit/:id',
+        name: 'edit-expense',
+        component: editExpense
     }
   ]
 })
