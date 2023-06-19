@@ -34,6 +34,8 @@ import salaries from './components/salary/index.vue'
 import paySalary from './components/salary/create.vue'
 import editSalary from './components/salary/edit.vue'
 
+import pos from './components/pos/pointofsale.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -172,6 +174,11 @@ const router = createRouter({
         path: '/salary/edit/:id',
         name: 'edit-salary',
         component: editSalary
+    },
+    {
+        path: '/pos',
+        name: 'pos',
+        component: pos
     }
   ]
 })

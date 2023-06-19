@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
+use App\Http\Controllers\Api\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,5 @@ Route::apiResource('/expense', ExpenseController::class);
 Route::apiResource('/salary', SalaryController::class);
 
 Route::post('/salary/pay/{id}', [SalaryController::class, 'paySalary']);
+
+Route::get('/addToCart/{id}', [CartController::class, 'addToCart']);

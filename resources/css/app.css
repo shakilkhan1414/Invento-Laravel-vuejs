@@ -20,3 +20,11 @@
 form label{
     font-weight: 700;
 }
+
+.border-div{
+    border-bottom: 1px solid #eaecf4;
+    margin-bottom: 0 !important;
+}
+.bg-silver{
+    background-color: #eee;
+}

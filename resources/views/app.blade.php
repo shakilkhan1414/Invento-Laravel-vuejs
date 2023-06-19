@@ -30,13 +30,18 @@
                   <div class="sidebar-brand-text mx-2">Invento</div>
                 </router-link>
                 <hr class="sidebar-divider my-0">
-                <li class="nav-item active">
+                <li class="nav-item active border-div">
                   <router-link class="nav-link" to="/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></router-link>
                 </li>
-                <hr class="sidebar-divider">
-                <div class="sidebar-heading">
+                <li class="nav-item active border-div">
+                    <router-link class="nav-link" to="/pos">
+                        <i class="fas fa-shopping-cart fa-2x"></i>
+                        <span>POS</span>
+                    </router-link>
+                  </li>
+                <div class="sidebar-heading mt-3">
                   Features
                 </div>
                 <li class="nav-item">
