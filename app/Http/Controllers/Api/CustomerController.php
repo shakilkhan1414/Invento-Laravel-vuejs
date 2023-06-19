@@ -4,26 +4,25 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Supplier;
+use App\Models\Customer;
 use Intervention\Image\Facades\Image;
 
-class SupplierController extends Controller
+class CustomerController extends Controller
 {
 
     public function index()
     {
-        $suppliers=Supplier::all();
-        return response()->json($suppliers);
+        $customers=Customer::all();
+        return response()->json($customers);
     }
 
     public function store(Request $request)
     {
         $validatedData=$request->validate([
             'name'=> 'required',
-            'email'=> 'required | unique:suppliers',
-            'address'=> 'required',
-            'phone'=> 'required | numeric',
-            'shop_name'=> 'required'
+            'email'=> 'unique:customers',
+            'address'=> '',
+            'phone'=> 'required | numeric | unique:customers'
         ]);
 
         if ($request->image) {
@@ -33,36 +32,35 @@ class SupplierController extends Controller
 
             $name = time().".".$ext;
             $img = Image::make($request->image)->resize(200,200);
-            $upload_path = 'backend/img/supplier/';
+            $upload_path = 'backend/img/customer/';
             $image_url = $upload_path.$name;
             $img->save($image_url);
             $validatedData['image']=$image_url;
         }
 
-        Supplier::create($validatedData);
+        Customer::create($validatedData);
     }
 
     public function show($id)
     {
-        $supplier=Supplier::find($id);
-        return response()->json($supplier);
+        $customer=Customer::find($id);
+        return response()->json($customer);
     }
 
     public function update(Request $request, $id)
     {
-        $supplier=Supplier::find($id);
+        $customer=Customer::find($id);
 
         $validatedData=$request->validate([
             'name'=> 'required',
-            'email'=> 'required',
-            'address'=> 'required',
-            'phone'=> 'required | numeric',
-            'shop_name'=> 'required '
+            'email'=> '',
+            'address'=> '',
+            'phone'=> 'required | numeric'
         ]);
 
         if ($request->newImage) {
-            if($supplier->image){
-                unlink($supplier->image);
+            if($customer->image){
+                unlink($customer->image);
             }
             $position = strpos($request->newImage, ';');
             $sub = substr($request->newImage, 0, $position);
@@ -70,21 +68,21 @@ class SupplierController extends Controller
 
             $name = time().".".$ext;
             $img = Image::make($request->newImage)->resize(200,200);
-            $upload_path = 'backend/img/supplier/';
+            $upload_path = 'backend/img/customer/';
             $image_url = $upload_path.$name;
             $img->save($image_url);
             $validatedData['image']=$image_url;
         }
 
-        $supplier->update($validatedData);
+        $customer->update($validatedData);
     }
 
     public function destroy($id)
     {
-        $supplier=Supplier::find($id);
-        if($supplier->image){
-            unlink($supplier->image);
+        $customer=Customer::find($id);
+        if($customer->image){
+            unlink($customer->image);
         }
-        $supplier->delete();
+        $customer->delete();
     }
 }

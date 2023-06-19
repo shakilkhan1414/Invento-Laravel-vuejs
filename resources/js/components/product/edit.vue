@@ -214,7 +214,7 @@ const imageUpload=(event)=>{
                                     <div class="col-md-8">
                                         <div class="form-row">
                                             <div class="col-md-9">
-                                                <label for="image">Employee Image</label>
+                                                <label for="image">Product Image</label>
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="image" @change="imageUpload">
                                                 <label class="custom-file-label" for="image">Choose file</label>

@@ -67,7 +67,9 @@ class EmployeeController extends Controller
         ]);
 
         if ($request->newImage) {
-            unlink($employee->image);
+            if($employee->image){
+                unlink($employee->image);
+            }
             $position = strpos($request->newImage, ';');
             $sub = substr($request->newImage, 0, $position);
             $ext = explode('/', $sub)[1];

@@ -13,6 +13,10 @@ import addSupplier from './components/supplier/create.vue'
 import suppliers from './components/supplier/index.vue'
 import editSupplier from './components/supplier/edit.vue'
 
+import addCustomer from './components/customer/create.vue'
+import customers from './components/customer/index.vue'
+import editCustomer from './components/customer/edit.vue'
+
 import addCategory from './components/category/create.vue'
 import categories from './components/category/index.vue'
 import editCategory from './components/category/edit.vue'
@@ -88,6 +92,21 @@ const router = createRouter({
         path: '/supplier/edit/:id',
         name: 'edit-supplier',
         component: editSupplier
+    },
+    {
+        path: '/customers/create',
+        name: 'add-customer',
+        component: addCustomer
+    },
+    {
+        path: '/customers',
+        name: 'customers',
+        component: customers
+    },
+    {
+        path: '/customer/edit/:id',
+        name: 'edit-customer',
+        component: editCustomer
     },
     {
         path: '/categories/create',

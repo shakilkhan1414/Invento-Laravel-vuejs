@@ -17,3 +17,6 @@
 .loading{
     margin-top: 20px;
 }
+form label{
+    font-weight: 700;
+}

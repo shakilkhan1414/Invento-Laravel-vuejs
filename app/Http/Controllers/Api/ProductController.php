@@ -71,7 +71,9 @@ class ProductController extends Controller
         ]);
 
         if ($request->newImage) {
-            unlink($product->image);
+            if($product->image){
+                unlink($product->image);
+            }
             $position = strpos($request->newImage, ';');
             $sub = substr($request->newImage, 0, $position);
             $ext = explode('/', $sub)[1];
