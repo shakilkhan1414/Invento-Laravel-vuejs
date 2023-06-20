@@ -13,8 +13,8 @@ onBeforeMount(() => {
 });
 
 const formData=reactive({
-    email: '',
-    password: ''
+    email: 'khan.shakil.1414@gmail.com',
+    password: 'admin'
 })
 
 let errors=reactive({

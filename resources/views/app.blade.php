@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="{{asset('backend/img/logo/favicon.png')}}" rel="icon">
-  <title>Inventory Management App</title>
+  <title>Invento | Dashboard</title>
   <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/css/ruang-admin.min.css')}}" rel="stylesheet">
@@ -143,7 +143,7 @@
                   </li>
 
                 <hr class="sidebar-divider">
-                <div class="version" id="version-ruangadmin"></div>
+                <div class="version">Version 1.0.1</div>
               </ul>
         </nav>
         <!-- Sidebar -->
@@ -151,7 +151,7 @@
           <div id="content">
             <!-- TopBar -->
             <nav  v-if="$route.path === '/' || $route.path === '/register' || $route.path === '/forget-password' ? false : true" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
-              <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+              <button id="sidebarToggleTop" onclick="handleClick()" class="btn btn-link rounded-circle mr-3">
                 <i class="fa fa-bars"></i>
               </button>
               <ul class="navbar-nav ml-auto">
@@ -182,7 +182,7 @@
                   <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <img class="img-profile rounded-circle" src="{{asset('backend/img/boy.png')}}" style="max-width: 60px">
-                    <span class="ml-2 d-none d-lg-inline text-white small"><script>document.write(localStorage.getItem('user'))</script></span>
+                    <span class="ml-2 d-none d-lg-inline text-white small user_name"></span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
@@ -216,7 +216,7 @@
           <footer class="sticky-footer bg-white">
             <div class="container my-auto">
               <div class="copyright text-center my-auto">
-                <span>Copyright &copy; <script> document.write(new Date().getFullYear()); </script> - Developed by
+                <span>Copyright &copy; <span class="copyYear"> dsds </span> - Developed by
                   <b><a href="https://shakildev.com" target="_blank">Shakil</a></b>
                 </span>
               </div>
@@ -235,11 +235,30 @@
   <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-  <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
-  <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script>
-  <script src="{{ asset('backend/js/demo/chart-area-demo.js') }}"></script>
   <script src="{{asset('backend/noty/noty.js')}}"></script>
+
+  <script>
+    const handleClick = () => {
+        document.body.classList.toggle("sidebar-toggled");
+        document.querySelector(".sidebar").classList.toggle("toggled");
+        if (document.querySelector(".sidebar").classList.contains("toggled")) {
+        document.querySelector('.sidebar .collapse').classList.remove('show');
+        }
+    };
+
+    let interval=setInterval(function() {
+        if(localStorage.getItem('user')){
+            document.querySelector('.user_name').innerHTML=localStorage.getItem('user')
+            clearInterval(interval)
+        }
+
+        }, 500);
+
+    document.querySelector('.copyYear').innerHTML=new Date().getFullYear()
+
+  </script>
   @vite('resources/js/app.js')
 </body>
 
 </html>
+

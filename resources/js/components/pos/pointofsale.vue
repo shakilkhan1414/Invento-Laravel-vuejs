@@ -217,7 +217,7 @@ watch(searchTerm, (currentValue, oldValue) => {
                 <div class="card mb-4">
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Order Items</h6>
-                    <router-link to="/customers/create" class="btn btn-sm btn-info"><font color="#ffffff">Add Customer</font></router-link>
+                    <router-link to="/customers/create" class="btn btn-sm btn-info text-light">Add Customer</router-link>
 
                   </div>
 
@@ -245,7 +245,7 @@ watch(searchTerm, (currentValue, oldValue) => {
                             </td>
                             <td>{{ cart.product_price  }}</td>
                             <td>{{ cart.sub_total }}</td>
-                        <td><a @click="removeItem(cart.id)" class="btn btn-sm btn-primary cursor-pointer"><font color="#ffffff">X</font></a></td>
+                        <td><a @click="removeItem(cart.id)" class="btn btn-sm btn-primary cursor-pointer text-light">X</a></td>
                         </tr>
 
                             </tbody>

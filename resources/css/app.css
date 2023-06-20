@@ -41,3 +41,6 @@ form label{
 #em_photo{
     height: 70px;
 }
+.text-light{
+    color: white !important;
+}

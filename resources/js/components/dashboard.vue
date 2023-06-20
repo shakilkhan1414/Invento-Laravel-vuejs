@@ -208,8 +208,3 @@ const allProduct= ()=>{
     <!--Row-->
 
 </template>
-
-
-<style>
-
-</style>
