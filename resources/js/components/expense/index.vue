@@ -103,7 +103,7 @@ const deleteExpense=(id)=>{
                                 <tr v-for="(expense,index) in filterSearch.value" :key="expense.id">
                                     <td>{{index+1}}</td>
                                     <td>{{expense.details}}</td>
-                                    <td>{{expense.amount}}</td>
+                                    <td>{{expense.amount}} $</td>
                                     <td>{{expense.date}}</td>
                                     <td>
                                         <router-link :to="{name: 'edit-expense',params: {id:expense.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Edit</router-link>

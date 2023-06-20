@@ -179,7 +179,7 @@ const OrderDetails = () => {
                                                                     }}
                                                                 </td>
                                                                 <td>
-                                                                    <img :src="'/' +detail.product.image" id="em_photo"/>
+                                                                    <img :src="detail.product.image ? '/' +detail.product.image : detail.product.image" id="em_photo"/>
                                                                 </td>
                                                                 <td>
                                                                     {{

@@ -111,8 +111,8 @@ const deleteProduct=(id)=>{
                                     <td>{{product.product_code}}</td>
                                     <td>{{product.category.category_name}}</td>
                                     <td>{{product.supplier.name}}</td>
-                                    <td>{{product.buying_price}}</td>
-                                    <td>{{product.selling_price}}</td>
+                                    <td>{{product.buying_price}} $</td>
+                                    <td>{{product.selling_price}} $</td>
                                     <td>{{product.root}}</td>
                                     <td>{{product.buying_date}}</td>
                                     <td>{{product.product_quantity}}</td>

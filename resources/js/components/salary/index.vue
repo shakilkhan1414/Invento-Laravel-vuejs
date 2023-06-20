@@ -107,7 +107,7 @@ const deleteSalary=(id)=>{
                                     <td>{{salary.employee.name}}</td>
                                     <td>{{salary.salary_month}}</td>
                                     <td>{{salary.salary_year}}</td>
-                                    <td>{{salary.amount}}</td>
+                                    <td>{{salary.amount}} $</td>
                                     <td>{{salary.salary_date}}</td>
                                     <td>
                                         <router-link :to="{name: 'edit-salary',params: {id:salary.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Edit</router-link>

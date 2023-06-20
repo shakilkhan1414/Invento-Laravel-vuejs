@@ -216,8 +216,8 @@ watch(searchTerm, (currentValue, oldValue) => {
               <div class="col-xl-5 col-lg-5">
                 <div class="card mb-4">
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Expense Insert</h6>
-                    <a class="btn btn-sm btn-info"><font color="#ffffff">Add Customer</font></a>
+                    <h6 class="m-0 font-weight-bold text-primary">Order Items</h6>
+                    <router-link to="/customers/create" class="btn btn-sm btn-info"><font color="#ffffff">Add Customer</font></router-link>
 
                   </div>
 
@@ -343,7 +343,7 @@ watch(searchTerm, (currentValue, oldValue) => {
                                     <div class="card-body">
                                     <h6 class="card-title">{{ product.product_name }}</h6>
                             <span class="badge badge-success" v-if="product.product_quantity  >= 1 ">Available {{ product.product_quantity }}  </span>
-                        <span class="badge badge-danger" v-else=" ">Stock Out </span>
+                            <span class="badge badge-danger" v-else=" ">Stock Out </span>
 
                                     </div>
                                 </div></button>

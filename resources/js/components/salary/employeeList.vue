@@ -76,7 +76,7 @@ watch(searchTerm, (currentValue, oldValue) => {
                                     <td>{{employee.email}}</td>
                                     <td>{{employee.nid}}</td>
                                     <td>{{employee.phone}}</td>
-                                    <td>{{employee.salary}}</td>
+                                    <td>{{employee.salary}} $</td>
                                     <td><img v-if="employee.image" :src="'/'+employee.image" class="employee-image"></td>
                                     <td>
                                         <router-link :to="{name: 'paySalary',params: {id:employee.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Pay Salary</router-link>

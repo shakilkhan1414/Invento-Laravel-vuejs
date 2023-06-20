@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,5 +61,8 @@ Route::post('/order/complete', [CartController::class, 'order']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/order/view/{id}', [OrderController::class, 'show']);
 Route::get('/order/orderDetails/{id}', [OrderController::class, 'orderDetails']);
+
+Route::get('/statistics', [HomeController::class, 'statistics']);
+
 
 

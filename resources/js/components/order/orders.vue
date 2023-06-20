@@ -73,9 +73,9 @@ watch(searchTerm, (currentValue, oldValue) => {
                                 <tr v-for="(order,index) in filterSearch.value" :key="order.id">
                                     <td>{{index+1}}</td>
                                     <td>{{order.customer.name}}</td>
-                                    <td>{{order.total}}</td>
-                                    <td>{{order.pay}}</td>
-                                    <td>{{order.due}}</td>
+                                    <td>{{order.total}} $</td>
+                                    <td>{{order.pay}} $</td>
+                                    <td>{{order.due? order.due: 0}} $</td>
                                     <td>{{order.payby}}</td>
                                     <td>{{order.order_date}}</td>
                                     <td>
