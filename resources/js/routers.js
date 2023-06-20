@@ -35,6 +35,8 @@ import paySalary from './components/salary/create.vue'
 import editSalary from './components/salary/edit.vue'
 
 import pos from './components/pos/pointofsale.vue'
+import orders from './components/order/orders.vue'
+import viewOrder from './components/order/view.vue'
 
 
 const router = createRouter({
@@ -179,6 +181,16 @@ const router = createRouter({
         path: '/pos',
         name: 'pos',
         component: pos
+    },
+    {
+        path: '/orders',
+        name: 'orders',
+        component: orders
+    },
+    {
+        path: '/order/view/:id',
+        name: 'view-order',
+        component: viewOrder
     }
   ]
 })

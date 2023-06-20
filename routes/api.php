@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,18 @@ Route::apiResource('/product', ProductController::class);
 Route::apiResource('/expense', ExpenseController::class);
 Route::apiResource('/salary', SalaryController::class);
 
+
 Route::post('/salary/pay/{id}', [SalaryController::class, 'paySalary']);
 
 Route::get('/addToCart/{id}', [CartController::class, 'addToCart']);
+Route::get('/cart/products', [CartController::class, 'cartProducts']);
+Route::get('/cart/remove/{id}', [CartController::class, 'removeCart']);
+Route::get('/cart/increment/{id}', [CartController::class, 'increment']);
+Route::get('/cart/decrement/{id}', [CartController::class, 'decrement']);
+Route::post('/order/complete', [CartController::class, 'order']);
+
+Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/order/view/{id}', [OrderController::class, 'show']);
+Route::get('/order/orderDetails/{id}', [OrderController::class, 'orderDetails']);
+
+

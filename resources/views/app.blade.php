@@ -110,6 +110,12 @@
                     </div>
                   </li>
                   <li class="nav-item">
+                    <router-link class="nav-link" to="/orders">
+                      <i class="fab fa-fw fa-wpforms"></i>
+                      <span>Orders</span>
+                    </router-link>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExpense"
                       aria-expanded="true" aria-controls="collapseExpense">
                       <i class="far fa-fw fa-window-maximize"></i>

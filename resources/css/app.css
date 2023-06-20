@@ -28,3 +28,16 @@ form label{
 .bg-silver{
     background-color: #eee;
 }
+.cartInput{
+    width: 25px;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 2px;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+#em_photo{
+    height: 70px;
+}

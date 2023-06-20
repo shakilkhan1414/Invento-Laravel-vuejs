@@ -1,6 +1,6 @@
 <script setup>
 
-import {ref,reactive,onBeforeMount,watch } from 'vue'
+import {ref,reactive,onBeforeMount,watch,computed } from 'vue'
 import { useRouter} from 'vue-router'
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
@@ -14,13 +14,17 @@ onBeforeMount(() => {
     allProduct()
     allCustomer()
     allCategory()
+    cartProducts()
 });
 
 
 const products=reactive([])
 const customers=reactive([])
 const categories=reactive([])
+const carts=reactive([])
 const filterSearch=reactive([])
+const qty=ref(0)
+const subtotal=ref(0)
 
 let orderData=reactive({
     customer_id:'',
@@ -70,6 +74,18 @@ const allCategory= ()=>{
 
 }
 
+const cartProducts= ()=>{
+    axios.get('/api/cart/products')
+    .then(res => {
+        carts.value=res.data
+    })
+    .catch(error=> {
+            console.log(error)
+        }
+    )
+
+}
+
 const subProduct=(id)=>{
     filterSearch.value = products.value.filter(product=>{
         return product.category_id == id
@@ -83,6 +99,7 @@ const storeAllProduct=()=>{
 const addToCart=(id)=>{
     axios.get('/api/addToCart/'+id)
     .then(() => {
+        cartProducts()
         Notification.cart_success()
     })
     .catch(error=> {
@@ -90,6 +107,83 @@ const addToCart=(id)=>{
         }
     )
 }
+
+const removeItem=(id)=>{
+    axios.get('/api/cart/remove/'+id)
+    .then(() => {
+        cartProducts()
+        Notification.cart_delete()
+    })
+    .catch(error=> {
+            console.log(error)
+        }
+    )
+}
+
+const increment=(id)=>{
+    axios.get('/api/cart/increment/'+id)
+    .then(() => {
+        cartProducts()
+    })
+    .catch(error=> {
+            console.log(error)
+        }
+    )
+}
+
+const decrement=(id)=>{
+    axios.get('/api/cart/decrement/'+id)
+    .then(() => {
+        cartProducts()
+    })
+    .catch(error=> {
+            console.log(error)
+        }
+    )
+}
+
+const orderdone=()=>{
+    orderData.quantity=qty
+    orderData.sub_total=subtotal
+    orderData.vat=5
+    orderData.total=subtotal.value*5/100 + subtotal.value
+
+    axios.post('/api/order/complete',orderData)
+    .then(() => {
+        Notification.success()
+        cartProducts()
+        allProduct()
+        orderData.customer_id=''
+        orderData.pay=''
+        orderData.due=''
+        orderData.payby=''
+    })
+    .catch(error=> {
+        if(error.response.status === 422){
+            errors.customer_id = error.response.data.errors.customer_id ? error.response.data.errors.customer_id[0] : ''
+            errors.pay = error.response.data.errors.pay ? error.response.data.errors.pay[0] : ''
+            errors.due = error.response.data.errors.due ? error.response.data.errors.due[0] : ''
+            errors.payby = error.response.data.errors.payby ? error.response.data.errors.payby[0] : ''
+        }
+        }
+    )
+}
+
+watch(() => carts.value, (currentValue, oldValue) => {
+    let sum=0
+    currentValue.forEach(cart => {
+        sum+= parseFloat(cart.product_quantity)
+    });
+    qty.value=sum
+
+    let total=0
+    currentValue.forEach(cart => {
+        total+= (parseFloat(cart.product_quantity)* parseFloat(cart.product_price))
+    });
+    subtotal.value=total
+
+});
+
 
 watch(() => products.value, (currentValue, oldValue) => {
     filterSearch.value = currentValue;
@@ -140,26 +234,26 @@ watch(searchTerm, (currentValue, oldValue) => {
                       </thead>
                       <tbody>
 
-                    <!-- <tr v-for="cart in carts" :key="cart.id">
-                    <td>{{ cart.pro_name }}</td>
-                    <td><input type="text" readonly="" style="width: 15px;" :value="cart.pro_quantity">
+                        <tr v-for="cart in carts.value" :key="cart.id">
+                        <td>{{ cart.product_name }}</td>
+                        <td>
                             <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
-                        <button  @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger" v-if="cart.pro_quantity >= 2">-</button>
-                        <button class="btn btn-sm btn-danger" v-else="" disabled="">-</button>
+                            <input type="text" class="border border-info cartInput" readonly="" :value="cart.product_quantity">
+                            <button  @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger" v-if="cart.product_quantity >= 2">-</button>
+                            <button class="btn btn-sm btn-danger" v-else="" disabled="">-</button>
 
-                                </td>
-                                <td>{{ cart.product_price  }}</td>
-                                <td>{{ cart.sub_total }}</td>
-                        <td><a @click="removeItem(cart.id)" class="btn btn-sm btn-primary"><font color="#ffffff">X</font></a></td>
-                        </tr> -->
+                            </td>
+                            <td>{{ cart.product_price  }}</td>
+                            <td>{{ cart.sub_total }}</td>
+                        <td><a @click="removeItem(cart.id)" class="btn btn-sm btn-primary cursor-pointer"><font color="#ffffff">X</font></a></td>
+                        </tr>
 
-
-                                </tbody>
-                                </table>
+                            </tbody>
+                            </table>
                             </div>
                             <div class="card-footer">
                         <ul class="list-group">
-                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center">Total Quantity:
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Total Quantity:
                         <strong>{{ qty }}</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">Sub Total:
@@ -167,11 +261,11 @@ watch(searchTerm, (currentValue, oldValue) => {
                         </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center">Vat:
-                        <strong>{{ vats.vat }} %</strong>
+                        <strong>5%</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">Total :
-                        <strong>{{ subtotal*vats.vat /100 + subtotal}} $</strong>
-                        </li> -->
+                        <strong>{{ subtotal*5/100 + subtotal}} $</strong>
+                        </li>
 
                         </ul>
                         <br>
@@ -187,13 +281,13 @@ watch(searchTerm, (currentValue, oldValue) => {
 
                             <div class="form-group">
                                 <label>Pay</label>
-                                <input type="text" class="form-control" required="" v-model="orderData.pay">
+                                <input type="text" class="form-control" v-model="orderData.pay">
                                 <small class="text-danger" v-if="errors.pay">{{errors.pay}}</small>
                             </div>
 
                             <div class="form-group">
                                 <label>Due</label>
-                                <input type="text" class="form-control" required="" v-model="orderData.due">
+                                <input type="text" class="form-control" v-model="orderData.due">
                                 <small class="text-danger" v-if="errors.due">{{errors.due}}</small>
                             </div>
 
@@ -210,8 +304,6 @@ watch(searchTerm, (currentValue, oldValue) => {
                             <button type="submit" class="btn btn-primary">Submit</button>
 
                         </form>
-
-
 
                   </div>
 
@@ -280,11 +372,14 @@ watch(searchTerm, (currentValue, oldValue) => {
                                     </div>
                                 </button>
                                 </div>
+
                             </div>
                         </div>
 
                     </div>
-
+                    <div v-if="!filterSearch.value" class="loading pb-3">
+                        <ClipLoader color="#3742fa"/>
+                    </div>
 
                   </div>
 
@@ -295,8 +390,6 @@ watch(searchTerm, (currentValue, oldValue) => {
           </div>
 
   </template>
-
-
 
 
 <style type="text/css" scoped>
