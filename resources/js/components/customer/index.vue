@@ -106,7 +106,7 @@ const deleteCustomer=(id)=>{
                                     <td>{{customer.email}}</td>
                                     <td>{{customer.phone}}</td>
                                     <td>{{customer.address}}</td>
-                                    <td><img :src="customer.image" class="employee-image"></td>
+                                    <td><img :src="'/'+customer.image" class="employee-image"></td>
                                     <td>
                                         <router-link :to="{name: 'edit-customer',params: {id:customer.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Edit</router-link>
                                         <button @click="deleteCustomer(customer.id)" class="btn btn-danger btn-sm mb-1">Delete</button>

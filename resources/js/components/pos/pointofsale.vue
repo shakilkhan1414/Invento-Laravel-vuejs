@@ -339,7 +339,7 @@ watch(searchTerm, (currentValue, oldValue) => {
                             <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="product in filterSearch.value" :key="product.id">
                                 <button class="btn btn-sm" @click.prevent="addToCart(product.id)">
                                 <div class="card" style="width: 8.5rem; margin-bottom: 5px;">
-                                    <img :src="product.image" id="em_photo" class="card-img-top">
+                                    <img :src="'/'+product.image" id="em_photo" class="card-img-top">
                                     <div class="card-body">
                                     <h6 class="card-title">{{ product.product_name }}</h6>
                             <span class="badge badge-success" v-if="product.product_quantity  >= 1 ">Available {{ product.product_quantity }}  </span>
@@ -362,7 +362,7 @@ watch(searchTerm, (currentValue, oldValue) => {
                             <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="product in filterSearch.value" :key="product.id">
                                 <button class="btn btn-sm" @click.prevent="addToCart(product.id)">
                                 <div class="card" style="width: 8.5rem; margin-bottom: 5px;">
-                                    <img :src="product.image" id="em_photo" class="card-img-top">
+                                    <img :src="'/'+product.image" id="em_photo" class="card-img-top">
                                     <div class="card-body">
                                     <h6 class="card-title">{{ product.product_name }}</h6>
                                     <span class="badge badge-success" v-if="product.product_quantity  >= 1 ">Available {{ product.product_quantity }}  </span>

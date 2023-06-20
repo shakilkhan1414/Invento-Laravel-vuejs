@@ -14,7 +14,7 @@
   <link href="{{asset('backend/css/ruang-admin.min.css')}}" rel="stylesheet">
   <link href="{{asset('backend/noty/noty.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/noty/sunset.css')}}" rel="stylesheet" type="text/css">
-  @vite('resources/css/app.css')
+  @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 
 <body id="page-top">
@@ -257,7 +257,7 @@
     document.querySelector('.copyYear').innerHTML=new Date().getFullYear()
 
   </script>
-  @vite('resources/js/app.js')
+
 </body>
 
 </html>

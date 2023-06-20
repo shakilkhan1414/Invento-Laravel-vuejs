@@ -183,7 +183,7 @@ const allProduct= ()=>{
                     <td>{{product.category.category_name}}</td>
                     <td>{{product.supplier.name}}</td>
                     <td>{{product.buying_price}} $</td>
-                    <td><img :src="product.image" class="employee-image"></td>
+                    <td><img :src="'/'+product.image" class="employee-image"></td>
                     <td>
                         <span class="badge badge-success" v-if="product.product_quantity  >= 1 ">Available</span>
                         <span class="badge badge-danger" v-else>Stock Out </span>

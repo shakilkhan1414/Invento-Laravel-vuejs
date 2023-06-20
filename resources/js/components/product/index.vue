@@ -116,7 +116,7 @@ const deleteProduct=(id)=>{
                                     <td>{{product.root}}</td>
                                     <td>{{product.buying_date}}</td>
                                     <td>{{product.product_quantity}}</td>
-                                    <td><img :src="product.image" class="employee-image"></td>
+                                    <td><img :src="'/'+product.image" class="employee-image"></td>
                                     <td>
                                         <router-link :to="{name: 'edit-product',params: {id:product.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Edit</router-link>
                                         <button @click="deleteProduct(product.id)" class="btn btn-danger btn-sm mb-1">Delete</button>

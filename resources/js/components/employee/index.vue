@@ -110,7 +110,7 @@ const deleteEmployee=(id)=>{
                                     <td>{{employee.phone}}</td>
                                     <td>{{employee.salary}}</td>
                                     <td>{{employee.joining_date}}</td>
-                                    <td><img :src="employee.image" class="employee-image"></td>
+                                    <td><img :src="'/'+employee.image" class="employee-image"></td>
                                     <td>
                                         <router-link :to="{name: 'edit-employee',params: {id:employee.id}}" class="btn btn-primary btn-sm mx-1 mb-1">Edit</router-link>
                                         <button @click="deleteEmployee(employee.id)" class="btn btn-danger btn-sm mb-1">Delete</button>
