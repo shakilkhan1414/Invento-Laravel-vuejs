@@ -1,3 +1,25 @@
+<script setup>
+
+import {ref,reactive,onBeforeMount } from 'vue'
+import { useRouter} from 'vue-router'
+
+const router = useRouter()
+
+onBeforeMount(() => {
+    if(User.loggedIn()){
+        router.push({name: 'dashboard'})
+    }
+
+});
+
+const forgotPassword= ()=>{
+
+
+}
+
+
+</script>
+
 <template>
 
     <div>
@@ -11,13 +33,13 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">Forget Password</h1>
                     </div>
-                    <form class="user">
+                    <form class="user"  @submit.prevent="forgotPassword">
                         <div class="form-group">
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
                             placeholder="Enter Existing Email Address">
                         </div>
                         <div class="form-group">
-                        <a href="index.html" class="btn btn-primary btn-block">Forget Password</a>
+                        <button type="submit" class="btn btn-primary btn-block">Forget Password</button>
                         </div>
                     </form>
                     <hr>
@@ -37,12 +59,3 @@
 
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
-<style>
-
-</style>
